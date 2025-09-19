@@ -1,0 +1,35 @@
+/* General layout fixes */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f9fa;
+}
+
+.navbar-brand {
+    font-weight: bold;
+    font-size: 1.3rem;
+}
+
+.container {
+    max-width: 100%;
+    padding: 15px;
+}
+
+/* Responsive table */
+.table-responsive {
+    overflow-x: auto;
+}
+
+/* Buttons look better on small screens */
+.btn {
+    white-space: nowrap;
+}
+
+/* Adjust navbar items on small screens */
+@media (max-width: 576px) {
+    .navbar-nav {
+        text-align: center;
+    }
+    .navbar-nav .nav-item {
+        margin-bottom: 8px;
+    }
+}

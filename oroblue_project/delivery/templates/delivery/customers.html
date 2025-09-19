@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Customers</h2>
+
+<a class="btn btn-success mb-3" href="{% url 'customer_add' %}">Add Customer</a>
+<div class="mb-3 ">
+    <form method="get" class="d-flex">
+        <input type="text" name="q" class="form-control me-2"
+               placeholder="Search by name or phone"
+               value="{{ query }}">
+        <button type="submit" class="btn btn-primary">Search</button>
+    </form>
+</div>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Name</th><th>Phone</th><th>Address</th><th>Balance</th><th>Pending Balance</th><th>Bottles At Site</th><th>Customer Details</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for customer in customers %}
+        <tr>
+            <td>{{ customer.name }}</td>
+            <td>{{ customer.phone }}</td>
+            <td>{{ customer.address }}</td>
+            <td>{{ customer.balance }}</td>
+            <td>{{ customer.pending_balance }}</td>
+            <td>{{ customer.bottles_at_site }}</td>
+            <td><a href="{% url 'customer_detail' customer.id %}" class="btn btn-info btn-sm">View Info</a></td>
+            
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
