@@ -14,10 +14,11 @@ def dashboard(request):
     first_day_month = today.replace(day=1)
 
     # Daily total
-    daily_total = Transaction.objects.filter(date__date=today).aggregate(total=Sum("amount"))["total"] or 0
+    # Daily total
+    daily_total = Transaction.objects.filter(date=today).aggregate(total=Sum("amount"))["total"] or 0
 
-    # Monthly total
-    monthly_total = Transaction.objects.filter(date__date__gte=first_day_month).aggregate(total=Sum("amount"))["total"] or 0
+# Monthly total
+    monthly_total = Transaction.objects.filter(date__gte=first_day_month).aggregate(total=Sum("amount"))["total"] or 0
 
     context = {
         "total_customers": total_customers,
@@ -217,3 +218,4 @@ def bottle_price(request):
         form = BottlePriceForm()
     prices = BottlePrice.objects.all().order_by("-updated_at")
     return render(request, "delivery/bottle_price.html", {"form": form, "prices": prices})
+
