@@ -3,11 +3,16 @@ from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = "django-insecure-your-secret-key"
+SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", "django-insecure-your-secret-key")
 
-DEBUG = True
+# Debug should be False in production
+DEBUG = os.getenv("DEBUG", "False") == "True"
 
-ALLOWED_HOSTS = ["oroblue-management-system.onrender.com", "localhost", "127.0.0.1"]
+ALLOWED_HOSTS = [
+    "oroblue-management-system.onrender.com",
+    "localhost",
+    "127.0.0.1"
+]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -64,12 +69,20 @@ TIME_ZONE = 'Asia/Karachi'
 USE_I18N = True
 USE_TZ = True
 
+# Static files
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [BASE_DIR / "static"]
+
+# Where collectstatic will put files (needed for Render/production)
+STATIC_ROOT = BASE_DIR / "staticfiles"
+
+# Only add static dir if it exists (avoids warning on Render)
+if (BASE_DIR / "static").exists():
+    STATICFILES_DIRS = [BASE_DIR / "static"]
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_URL = "/login/"
 LOGIN_REDIRECT_URL = "/"   # After successful login
-
 LOGOUT_REDIRECT_URL = "/"  # After logout
+
+
