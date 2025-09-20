@@ -7,7 +7,7 @@ SECRET_KEY = "django-insecure-your-secret-key"
 
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["oroblue-management-system.onrender.com", "localhost", "127.0.0.1"]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -71,4 +71,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_URL = "/login/"
 LOGIN_REDIRECT_URL = "/"   # After successful login
+
 LOGOUT_REDIRECT_URL = "/"  # After logout
