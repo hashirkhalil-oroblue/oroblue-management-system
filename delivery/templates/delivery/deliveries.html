@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Deliveries</h2>
+<a class="btn btn-success mb-3" href="{% url 'delivery_add' %}">Add Delivery</a>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Customer</th>
+            <th>Date</th>
+            <th>Bottles Delivered</th>
+            <th>Bottles Returned</th>
+            <th>Bottles at Site</th>
+            <th>Total Amount</th>
+            <th>Amount Received</th>
+            <th>Pending Balance</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for d in deliveries %}
+        <tr>
+            <td>{{ d.customer.name }}</td>
+            <td>{{ d.date }}</td>
+            <td>{{ d.bottles_delivered }}</td>
+            <td>{{ d.bottles_returned }}</td>
+            <td>{{ d.customer.bottles_at_site }}</td>
+            <td>{{ d.total_amount }}</td>
+            <td>{{ d.amount_received }}</td>
+            <td>{{ d.customer.pending_balance }}</td>
+        </tr>
+    {% empty %}
+        <tr>
+            <td colspan="9" class="text-center">No deliveries yet.</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

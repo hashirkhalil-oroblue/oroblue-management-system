@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Add Delivery</h2>
+
+<form method="post" class="card p-3 shadow-sm">
+    {% csrf_token %}
+
+    <div class="mb-3">
+        <label for="customer-search">Search Customer</label>
+        <input type="text" id="customer-search" class="form-control" placeholder="Type name or phone...">
+    </div>
+
+    <div class="mb-3">
+        {{ form.customer.label_tag }}  
+        {{ form.customer }}
+    </div>
+
+    <div class="mb-3">
+        {{ form.bottles_delivered.label_tag }}  
+        {{ form.bottles_delivered }}
+    </div>
+
+    <div class="mb-3">
+        {{ form.bottles_returned.label_tag }}  
+        {{ form.bottles_returned }}
+    </div>
+
+    <div class="mb-3">
+        {{ form.amount_received.label_tag }}  
+        {{ form.amount_received }}
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>
+
+<script>
+    document.getElementById("customer-search").addEventListener("keyup", function() {
+        let filter = this.value.toLowerCase();
+        let options = document.querySelectorAll(".searchable-select option");
+        
+        options.forEach(option => {
+            let text = option.text.toLowerCase();
+            if (text.includes(filter)) {
+                option.style.display = "";
+            } else {
+                option.style.display = "none";
+            }
+        });
+    });
+</script>
+{% endblock %}
+
+
